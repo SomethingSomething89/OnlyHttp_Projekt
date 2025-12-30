@@ -21,7 +21,15 @@ router.post('/register', async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password)
-    return res.status(400).json({ message: 'Email i hasło są wymagane' });
+    return res.status(400).json({ message: 'Email i hasło są wymagane!' });
+
+  if (!email.includes('@')) {
+	return res.status (400).json({ message: 'Niepoprawny email!' });
+  }
+
+  if (password.length < 8) {
+	return res.status(400).json({ message: 'Hasło musi mieć minimum 8 znaków!' });  
+  }
 
   const db = readDB();
 
@@ -58,7 +66,10 @@ router.post('/login', async (req, res) => {
   if (!valid) return res.status(401).json({ message: 'Niepoprawne dane logowania' });
 
   const sessionId = uuidv4();
-  const session = { id: sessionId, userId: user.id };
+  
+  db.sessions = db.sessions.filter(s => s.userId !== user.id);
+  
+  const session = { id: sessionId, userId: user.id, expiresAt: Date.now() + 1000 * 60 * 60 };
   db.sessions.push(session);
   writeDB(db);
 

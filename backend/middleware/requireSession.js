@@ -20,6 +20,13 @@ function requireSession(req, res, next) {
   if (!session) {
     return res.status(401).json({ message: 'Nieprawidłowa sesja' });
   }
+  
+  if (Date.now() > session.expiresAt) {
+	  db.sessions = db.sessions.filter(s => s.id !== sessionId);
+	  fs.writeFileSync(dbPath, JSON.stringify(db, null, 2));
+	  
+	  return res.status(401).json({ message: 'Sesja wygasła' });
+  }
 
   req.userId = session.userId;
   next();

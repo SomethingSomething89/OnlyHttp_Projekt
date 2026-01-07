@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Twoje notatki</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Twoje notatki</h1>
+  <span id="status"></span>
+  <button id="logoutBtn">Wyloguj</button>
+
+  <ul id="notesList"></ul>
+  <input type="text" id="noteText" placeholder="Treść notatki">
+  <button id="addNoteBtn">Dodaj notatkę</button>
+
+  <script type="module">
+    import { redirectIfNotLoggedIn, updateStatus, logout } from './script/session.js';
+    redirectIfNotLoggedIn();
+    updateStatus();
+
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) logoutBtn.addEventListener('click', logout);
+  </script>
+  <script type="module" src="script/notes.js"></script>
+</body>
+</html>

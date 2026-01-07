@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <title>Logowanie</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module">
+    import { redirectIfLoggedIn } from './script/session.js';
+    redirectIfLoggedIn();
+  </script>
+</head>
+<body>
+  <h1>Logowanie</h1>
+  <input type="email" id="loginEmail" placeholder="Email">
+  <input type="password" id="loginPassword" placeholder="Hasło">
+  <button id="loginBtn">Zaloguj</button>
+  <div id="loginMessage"></div>
+  <p>Nie masz konta? <a href="register.html">Zarejestruj się</a></p>
+
+  <script type="module" src="script/login.js"></script>
+</body>
+</html>

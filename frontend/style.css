@@ -1,0 +1,23 @@
+body {
+  padding: 20px;
+}
+
+input {
+  display: block;
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+button {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
+
+#status {
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+#loginMessage, #registerMessage {
+  color: red;
+}

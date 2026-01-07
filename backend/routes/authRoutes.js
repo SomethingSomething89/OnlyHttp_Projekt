@@ -23,7 +23,9 @@ router.post('/register', async (req, res) => {
   if (!email || !password)
     return res.status(400).json({ message: 'Email i hasło są wymagane!' });
 
-  if (!email.includes('@')) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!emailRegex.test(email)) {
 	return res.status (400).json({ message: 'Niepoprawny email!' });
   }
 
